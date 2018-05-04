@@ -24,6 +24,10 @@
             .col-sm-6
               = f.email_field :email, class: 'form-control'
           .form-group
+            = f.label :phone, class: 'col-sm-12 control-label'
+            .col-sm-6
+              = f.telephone_field :phone, class: 'form-control'
+          .form-group
             = f.label :password, class: 'col-sm-12 control-label'
             .col-sm-6
               = f.password_field :password, autocomplete: "off", class: 'form-control'

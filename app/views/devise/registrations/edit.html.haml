@@ -17,27 +17,31 @@
         = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true, method: :put}) do |f|
           = devise_error_messages!
           .form-group
-            = f.label :image, class: 'col-sm-12 control-label'
+            = f.label :Profilepicture, class: 'col-sm-12 control-label'
             .col-sm-6
               = f.file_field :image
           .form-group
-            = f.label :email, class: 'col-sm-12 control-label'
+            = f.label :EmailId, class: 'col-sm-12 control-label'
             .col-sm-6
-              = f.email_field :email, class: 'form-control'
+              = f.email_field :email, class: 'form-control', placeholder: "please give valid email id"
+          .form-group
+            = f.label :Phonenumber, class: 'col-sm-12 control-label'
+            .col-sm-6
+              = f.telephone_field :phone, class: 'form-control', placeholder: "please give your mobile number 1111111111"
           .form-group
             = f.label :password, class: 'col-sm-12 control-label'
             %i (leave blank if you don't want to change it)
             .col-sm-6
-              = f.password_field :password, autocomplete: "off", class: 'form-control'
+              = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "please give password for your account"
           .form-group
-            = f.label :password_confirmation, class: 'col-sm-12 control-label'
+            = f.label :Password_confirmation, class: 'col-sm-12 control-label'
             .col-sm-6
-              = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+              = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "please write confirmation password"
           .form-group
             = f.label :current_password, class: 'col-sm-12 control-label'
             %i (we need your current password to confirm your changes)
             .col-sm-6
-              = f.password_field :current_password, autocomplete: "off", class: 'form-control'
+              = f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: "please write your current password"
               %br
               = f.submit "Update", class: "btn btn-primary"
               %br 
