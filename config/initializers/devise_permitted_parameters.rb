@@ -8,8 +8,8 @@ module DevisePermittedParameters
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:image])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:image])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:image,:phone])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:image,:phone])
   end
 
 end
