@@ -17,16 +17,24 @@
         %table.table.table-bordered.table-striped
           %thead
             %tr
-              %th Item Name
-              %th Created Date
-              %th{:colspan => "4"} Actions
+              %th Image
+              %th Description
+              %th Completion Date
+              %th status
           %tbody
             - @todos.each do |todo|
               %tr
+                %td= todo.image.url
                 %td= todo.item
-                %td= I18n.l(todo.created_at, format: "%Y-%m-%d")
-                %td= link_to 'Show', todo
-                %td= link_to 'Edit', edit_todo_path(todo)
-                %td= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' }
-        %br/
+                %td= I18n.l(todo.completion_time, format: "%Y-%m-%d")
+                %td= todo.status
+                %td.btn-group
+                  %button.btn.btn-danger.dropdown-toggle.px-3{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                    %span.sr-only Toggle Dropdown
+                  .dropdown-menu
+                    %ul.dropdown-item
+                      = link_to 'Show', todo
+                      = link_to 'Edit', edit_todo_path(todo)
+                      = link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' }
+
         = link_to 'New Todo', new_todo_path

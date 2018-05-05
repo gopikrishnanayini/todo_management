@@ -1,6 +1,12 @@
-= form_for @todo do |f|
+= form_for @todo , html: { multipart: true } do |f|
   %p
-    = f.label "Item Name"
+    = f.label "Description"
     = f.text_field "item"
+  %p 
+    = f.label "Completion Time"
+    = f.date_field "completion_time"
+  %p 
+    = f.label "Todo image"
+    = f.file_field "image"
   %p
     = f.submit
