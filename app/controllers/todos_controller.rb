@@ -3,7 +3,17 @@ class TodosController < ApplicationController
 	before_action :find_todo, :only => [:show,:edit, :update, :destroy]
 
 	def index
-    @todos = Todo.all
+    if params[:type].present?
+      @todos = Todo.order(:created_at => "#{params[:type]}")
+    elsif params[:filter].present? and params[:filter] == "all"
+      @todos = Todo.all
+    elsif params[:filter].present? and params[:filter] == "completed"
+      @todos = Todo.where(:status => "completed")
+    elsif params[:filter].present? and params[:filter] == "upcoming"
+      @todos = Todo.where("completion_time >?", Time.now)       
+    else
+      @todos = Todo.all
+    end
 	end
    
   def new
@@ -30,14 +40,19 @@ class TodosController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-    	if @todo.update_attributes(todo_params)
-    		format.html{redirect_to todos_path, :notice => "Todo was successfully updated."}
-    		format.json {render :show, status: :created, location: @todo }
-    	else
-    		format.html {render :new}
-    		format.json {render json:@todo.errors, status: :unprocessable_entity}
-    	end
+    if params[:status].present?  and params[:manual_approve].present? and params[:manual_approve] == "true"
+      @todo.perform_event(params[:status])
+      redirect_to todos_path
+    else 
+      respond_to do |format|
+      	if @todo.update_attributes(todo_params)
+      		format.html{redirect_to todos_path, :notice => "Todo was successfully updated."}
+      		format.json {render :show, status: :created, location: @todo }
+      	else
+      		format.html {render :new}
+      		format.json {render json:@todo.errors, status: :unprocessable_entity}
+      	end
+      end
     end
   end
 
