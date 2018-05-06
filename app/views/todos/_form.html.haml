@@ -4,7 +4,8 @@
     = f.text_area "description"
   %p 
     = f.label "Completion Time"
-    = f.date_field "completion_time"
+    = f.date_select "completion_time"
+    = f.time_select "completion_time", :ignore_date => true
   %p 
     = f.label "Todo image"
     = f.file_field "image"

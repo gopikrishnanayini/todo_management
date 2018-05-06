@@ -47,7 +47,7 @@
               %tr
                 %td= image_tag(todo.image.url(:thumb), :width => 60, :heigth => 60 )
                 %td= todo.description
-                %td= I18n.l(todo.completion_time, format: "%Y-%m-%d")
+                %td= I18n.l(todo.completion_time, format: "%Y-%m-%d %H-%M")
                 %td= todo.status
                 %td.btn-group
                   %button.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
