@@ -9,19 +9,18 @@
     %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"}
     %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
   %body
-    %br/
     .container
       .row
         .device-new-form
           %h2 Sign up
           = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
             .form-group
-              = f.label :email, class: 'col-sm-12 control-label'
+              = f.label "email*", class: 'col-sm-12 control-label'
               .col-sm-6
                 = f.email_field :email, autofocus: true, class: 'form-control', placeholder: "please give valid email id"
                 %p.error= show_errors(@user, :email)
             .form-group
-              = f.label :password, class: 'col-sm-12 control-label'
+              = f.label "password*", class: 'col-sm-12 control-label'
               - if @minimum_password_length
                 %em
                   (#{@minimum_password_length} characters minimum)
@@ -30,13 +29,13 @@
                 = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "please give password for your account"
                 %p.error= show_errors(@user, :password)
             .form-group
-              = f.label :password_confirmation, class: 'col-sm-12 control-label'
+              = f.label "password_confirmation*", class: 'col-sm-12 control-label'
               %br/
               .col-sm-6
                 = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "please write confirmation password"
                 %p.error= show_errors(@user, :password_confirmation)
             .form-group
-              = f.label "Username", class: 'col-sm-12 control-label'
+              = f.label "Username*", class: 'col-sm-12 control-label'
               %br/
               .col-sm-6
                 = f.text_field :username, autocomplete: "off", class: 'form-control', placeholder: "please enter User name"
@@ -54,11 +53,11 @@
                 = f.text_field :lastname, autocomplete: "off", class: 'form-control', placeholder: "please enter Last Name"
                 %p.error= show_errors(@user, :lastname)
             .form-group
-              = f.label :image, class: 'col-sm-12 control-label'
+              = f.label "Profile Picture(300x300)", class: 'col-sm-12 control-label'
               .col-sm-6
                 = f.file_field :image
             .form-group
-              = f.label "Phone number", class: 'col-sm-12 control-label'
+              = f.label "Phone number*", class: 'col-sm-12 control-label'
               %br/
               .col-sm-6
                 = f.text_field :phone, autocomplete: "off", class: 'form-control', placeholder: "please enter phone number"

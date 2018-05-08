@@ -1,30 +1,31 @@
 class TodosController < ApplicationController
     before_action :authenticate_user!
-	before_action :find_todo, :only => [:show,:edit, :update, :destroy]
+	before_action :find_user, :only => [:new, :create, :index]
+  before_action :find_todo, :only => [:show,:edit, :update, :destroy]
 
 	def index
     if params[:type].present?
-      @todos = Todo.order(:created_at => "#{params[:type]}")
+      @todos = @user.todos.order(:created_at => "#{params[:type]}")
     elsif params[:filter].present? and params[:filter] == "all"
-      @todos = Todo.all
+      @todos = @user.todos.all
     elsif params[:filter].present? and params[:filter] == "completed"
-      @todos = Todo.where(:status => "completed")
+      @todos = @user.todos.where(:status => "completed")
     elsif params[:filter].present? and params[:filter] == "upcoming"
-      @todos = Todo.where("completion_time >?", Time.now)       
+      @todos = @user.todos.where("completion_time >?", Time.now)       
     else
-      @todos = Todo.all
+      @todos = @user.todos.all
     end
 	end
    
   def new
-    @todo = Todo.new
+    @todo = @user.todos.build
   end
 
   def create
-    @todo = Todo.new(todo_params)
+    @todo = @user.todos.build(todo_params)
     respond_to do |format|
       if @todo.save
-      	format.html{redirect_to todos_path, :notice => "Todo was successfully created"}
+      	format.html{redirect_to user_todos_path(:user_id => current_user.id), :notice => "Todo was successfully created"}
       	format.json { render :show, status: :created, location: @todo }
       else
         format.html { render :new }
@@ -42,11 +43,11 @@ class TodosController < ApplicationController
   def update
     if params[:status].present?  and params[:manual_approve].present? and params[:manual_approve] == "true"
       @todo.perform_event(params[:status])
-      redirect_to todos_path
+      redirect_to user_todos_path(:user_id => current_user.id)
     else 
       respond_to do |format|
       	if @todo.update_attributes(todo_params)
-      		format.html{redirect_to todos_path, :notice => "Todo was successfully updated."}
+      		format.html{redirect_to user_todos_path(:user_id => current_user.id), :notice => "Todo was successfully updated."}
       		format.json {render :show, status: :created, location: @todo }
       	else
       		format.html {render :new}
@@ -58,7 +59,7 @@ class TodosController < ApplicationController
 
   def destroy
     @todo.destroy
-    redirect_to todos_path
+    redirect_to user_todos_path(:user_id => current_user.id)
   end
 
   private
@@ -66,7 +67,11 @@ class TodosController < ApplicationController
   	params.require(:todo).permit!
   end
 
+  def find_user
+  	@user = User.find(current_user.id)
+  end
+
   def find_todo
-  	@todo = Todo.find(params[:id])
+    @todo = Todo.find(params[:id])
   end
 end

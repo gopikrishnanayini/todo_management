@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
-    devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+
+
   root "homes#index"
-  resources :todos
+  resources :users do
+    resources :todos
+  end
   resources :homes
     
   namespace :api do
     namespace :v4 do
-      post 'todos/get_key' => 'todos#get_key'
-      get  'todos' => 'todos#index'
-      resources :todos , defaults: {format: 'json'} 
+      post 'users/log_in' => 'users#log_in'
+      resources :users , defaults: {format: 'json'} 
     end
   end
 end

@@ -22,13 +22,13 @@
           <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <% if current_user.present? %>
               <ul class="nav navbar-nav navbar-left">
-                <li><%= link_to "Todo's List", todos_path %></li>
+                <li><%= link_to "Todo's List", user_todos_path(:user_id => current_user.id) %></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item dropdown">
                   <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src=<%= current_user.image_url %> > <%= current_user.username %> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><%= link_to "My Profile", edit_user_registration_path %></li>
+                    <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
                     <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
                   </ul>
                 </li>
@@ -40,10 +40,8 @@
     </div>
   </head>
     <%= yield %>
-    <% if current_user.present? %>
-      <div class="container"> 
-        <%= render "layouts/footer" %>
-      </div>
-    <% end %>
+    <div class="container"> 
+      <%= render "layouts/footer" %>
+    </div>
    </body>
 </html>
