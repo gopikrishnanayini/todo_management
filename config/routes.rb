@@ -7,11 +7,7 @@ Rails.application.routes.draw do
     
   namespace :api do
     namespace :v4 do
-      get    '/models'          => 'models#index'
-      get    '/models/current'  => 'models#current'
-      post   '/models/create'   => 'models#create'
-      patch  '/model/:id'       => 'models#update'
-      delete '/model/:id'       => 'models#destroy'
+      resources :todos,  defaults: {format: 'json'} 
     end
   end
 end

@@ -30,4 +30,8 @@ class Todo < ApplicationRecord
       self.pending! 
     end
   end
+  
+  def image_url(style=:large)
+    style.present? ? self.image.url(style) : self.image.url
+  end
 end
