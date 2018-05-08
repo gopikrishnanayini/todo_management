@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     
   namespace :api do
     namespace :v4 do
-      resources :todos,  defaults: {format: 'json'} 
+      post 'todos/get_key' => 'todos#get_key'
+      get  'todos' => 'todos#index'
+      resources :todos , defaults: {format: 'json'} 
     end
   end
 end

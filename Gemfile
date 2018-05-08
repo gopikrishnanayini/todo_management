@@ -20,7 +20,7 @@ gem "paperclip"
 gem "pry"
 gem 'aasm', '~> 4.12'
 gem 'bcrypt', '~> 3.1.7'
-
+gem 'json'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
