@@ -18,7 +18,7 @@
           .form-group
             = f.label "EmailId", class: 'col-sm-12 control-label'
             .col-sm-6
-              = f.email_field :email, class: 'form-control', placeholder: "please give valid email id"
+              = f.email_field :email, class: 'form-control',:readonly => true,  placeholder: "please give valid email id"
           .form-group
             = f.label "Phonenumber*", class: 'col-sm-12 control-label'
             .col-sm-6
@@ -36,26 +36,14 @@
             .col-sm-6
               = f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: "please write your current password"
           .form-group
-            = f.label "UserName *", class: 'col-sm-12 control-label'
-            .col-sm-6
-              = f.text_field :username, autocomplete: "off", class: 'form-control', placeholder: "please enter User name"
-          .form-group
-            = f.label :Firstname, class: 'col-sm-12 control-label'
-            .col-sm-6
-              = f.text_field :firstname, autocomplete: "off", class: 'form-control', placeholder: "please enter First name"
-          .form-group
-            = f.label :LastName, class: 'col-sm-12 control-label'
-            .col-sm-6
-              = f.text_field :lastname, autocomplete: "off", class: 'form-control', placeholder: "please enter Last Name"
-          .form-group
             = f.label "Profilepicture(300x300)", class: 'col-sm-12 control-label'
             .col-sm-6
               = f.file_field :image
               = f.submit "Update", class: "btn btn-primary"
               %br 
               = link_to "Back", homes_path, class: "btn btn-success"
-              /%br
-              /%h3 Cancel my account
-              /%p
-              /Unhappy? #{button_to "Cancel my account", registration_path(resource_name), class: "btn btn-success", data: { confirm: "Are you sure?" }, method: :delete}
+              %br
+              %h3 Cancel my account
+              %p
+              Unhappy? #{button_to "Cancel my account", registration_path(resource_name), class: "btn btn-success", data: { confirm: "Are you sure?" }, method: :delete}
      

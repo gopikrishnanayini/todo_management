@@ -35,24 +35,6 @@
                 = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "please write confirmation password"
                 %p.error= show_errors(@user, :password_confirmation)
             .form-group
-              = f.label "Username*", class: 'col-sm-12 control-label'
-              %br/
-              .col-sm-6
-                = f.text_field :username, autocomplete: "off", class: 'form-control', placeholder: "please enter User name"
-                %p.error= show_errors(@user, :username)
-            .form-group
-              = f.label "firstname", class: 'col-sm-12 control-label'
-              %br/
-              .col-sm-6
-                = f.text_field :firstname, autocomplete: "off", class: 'form-control', placeholder: "please enter First name"
-                %p.error= show_errors(@user, :firstname)
-            .form-group
-              = f.label "lastname", class: 'col-sm-12 control-label'
-              %br/
-              .col-sm-6
-                = f.text_field :lastname, autocomplete: "off", class: 'form-control', placeholder: "please enter Last Name"
-                %p.error= show_errors(@user, :lastname)
-            .form-group
               = f.label "Profile Picture(300x300)", class: 'col-sm-12 control-label'
               .col-sm-6
                 = f.file_field :image
