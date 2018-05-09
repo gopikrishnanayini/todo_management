@@ -9,41 +9,41 @@
     %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"}
     %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
   %body
+    %br/
     .container
       .row
         %h2
           Edit #{resource_name.to_s.humanize}
-        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put}) do |f|
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true, method: :put}) do |f|
           = devise_error_messages!
           .form-group
-            = f.label "EmailId", class: 'col-sm-12 control-label'
+            = f.label :image, class: 'col-sm-12 control-label'
             .col-sm-6
-              = f.email_field :email, class: 'form-control',:readonly => true,  placeholder: "please give valid email id"
+              = f.file_field :image
           .form-group
             = f.label "Phonenumber*", class: 'col-sm-12 control-label'
             .col-sm-6
               = f.telephone_field :phone, class: 'form-control', placeholder: "please give your 10 digits mobile number"
           .form-group
-            = f.label "password *", class: 'col-sm-12 control-label'
+            = f.label :email, class: 'col-sm-12 control-label'
             .col-sm-6
-              = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "please give password for your account"
+              = f.email_field :email, class: 'form-control'
           .form-group
-            = f.label "Password_confirmation*", class: 'col-sm-12 control-label'
+            = f.label :password, class: 'col-sm-12 control-label'
+            %i (leave blank if you don't want to change it)
             .col-sm-6
-              = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "please write confirmation password"
+              = f.password_field :password, autocomplete: "off", class: 'form-control'
           .form-group
-            = f.label "current_password *", class: 'col-sm-12 control-label'
+            = f.label :password_confirmation, class: 'col-sm-12 control-label'
             .col-sm-6
-              = f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: "please write your current password"
+              = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
           .form-group
-            = f.label "Profilepicture(300x300)", class: 'col-sm-12 control-label'
+            = f.label :current_password, class: 'col-sm-12 control-label'
+            %i (we need your current password to confirm your changes)
             .col-sm-6
-              = f.file_field :image
+              = f.password_field :current_password, autocomplete: "off", class: 'form-control'
+              %br
               = f.submit "Update", class: "btn btn-primary"
               %br 
-              = link_to "Back", homes_path, class: "btn btn-success"
               %br
-              %h3 Cancel my account
-              %p
-              Unhappy? #{button_to "Cancel my account", registration_path(resource_name), class: "btn btn-success", data: { confirm: "Are you sure?" }, method: :delete}
-     
+              = link_to "Back", homes_path, class: "btn btn-success"
