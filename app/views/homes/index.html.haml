@@ -9,3 +9,22 @@
     %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"}
     %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
   %body
+%div{:class => "container.gopi"}
+  #myCarousel.carousel.slide{"data-ride" => "carousel"}
+    %ol.carousel-indicators
+      %li.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+      %li{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+      %li{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+    .carousel-inner
+      .item.active
+        = image_tag "index.jpeg", :style=>"width:100%;height:500px;"
+      .item
+        = image_tag "pexels-photo-248797.jpeg", :style=>"width:100%;height:500px;"
+      .item
+        = image_tag "prestige-476863311.jpg", :style=>"width:100%;height:500px;"
+    %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"}
+      %span.glyphicon.glyphicon-chevron-left
+      %span.sr-only Previous
+    %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"}
+      %span.glyphicon.glyphicon-chevron-right
+      %span.sr-only Next
